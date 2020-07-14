@@ -32,7 +32,7 @@ data class Category(
         /**
          * 目录状态
          */
-        var status: Boolean? = null,
+        var status: Int? = null,
 
         /**
          * 订单排序

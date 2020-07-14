@@ -17,8 +17,10 @@ class UserLoginAop {
     
     private val log = LoggerFactory.getLogger(this::class.java)
     
-    @Pointcut("!execution(* com..controller.*.login(..)) && !execution(* com..controller.*.register(..))")
-    fun excludePointcut(){}
+    @Pointcut("!execution(* com..controller.UserController.login(..)) " +
+            "&& !execution(* com..controller.UserController.register(..)) " +
+            "&& !execution(* com..controller.CategoryController.findAll(..))")
+    private fun excludePointcut(){}
 
     @Before("excludePointcut() && execution(* com..controller.*.*(..))")
     fun userLoginValid() {
