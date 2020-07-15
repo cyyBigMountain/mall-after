@@ -2,7 +2,6 @@ package com.dqpi.server.domain.entity
 
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
-import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -10,9 +9,9 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-@DynamicInsert
 @DynamicUpdate
-data class Product(
+@DynamicInsert
+data class Shipping(
         /**
          * id
          */
@@ -21,49 +20,49 @@ data class Product(
         var id: Int? = null,
 
         /**
-         * 目录id
+         * 用户id
          */
-        var categoryId: Int? = null,
+        var userId: Int? = null,
 
         /**
-         * 产品名
+         * 收货人姓名
          */
-        var name: String? = null,
+        var receiverName: String? = null,
 
         /**
-         * 子标题
+         * 收货人固定电话
          */
-        var subtitle: String? = null,
+        var receiverPhone: String? = null,
 
         /**
-         * 主图，url地址
+         * 收货人移动电话
          */
-        var mainImage: String? = null,
+        var receiverMobile: String? = null,
 
         /**
-         * 子图，json格式，拓展用
+         * 收货人省份
          */
-        var subImages: String? = null,
+        var receiverProvince: String? = null,
 
         /**
-         * 产品详情
+         * 收货人城市
          */
-        var detail: String? = null,
+        var receiverCity: String? = null,
 
         /**
-         * 产品价格
+         * 收货人区/县
          */
-        var price: BigDecimal? = null,
+        var receiverDistrict: String? = null,
 
         /**
-         * 库存
+         * 收货人详细地址
          */
-        var stock: Int? = null,
+        var receiverAddress: String? = null,
 
         /**
-         * 商品状态.1-在售 2-下架 3-删除
+         * 收货人邮编
          */
-        var status: Int? = null,
+        var receiverZip: String? = null,
 
         /**
          * 创建时间

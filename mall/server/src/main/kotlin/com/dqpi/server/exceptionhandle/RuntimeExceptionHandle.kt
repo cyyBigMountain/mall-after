@@ -18,7 +18,6 @@ class RuntimeExceptionHandle {
         return ResponseVo.error(ResponseEnum.ERROR, e.message.toString())
     }   
     
-    
     @ExceptionHandler(UserLoginException::class)
     @ResponseBody
     fun handle(e: UserLoginException): ResponseVo<String> {

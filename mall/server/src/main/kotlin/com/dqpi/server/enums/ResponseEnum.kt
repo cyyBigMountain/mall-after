@@ -15,5 +15,6 @@ enum class ResponseEnum(
     PRODUCT_OFF_SALE_OR_DELETE(12, "商品下架或删除"),
     PRODUCT_NOT_EXIST(13, "商品不存在"),
     PRODUCT_STOCK_ERROR(14, "库存不正确"),
-    CART_PRODUCT_NOT_EXIST(15, "购物车商品不存在")
+    CART_PRODUCT_NOT_EXIST(15, "购物车商品不存在"),
+    DELETE_SHIPPING_FAIL(16, "删除收货地址失败")
 }
