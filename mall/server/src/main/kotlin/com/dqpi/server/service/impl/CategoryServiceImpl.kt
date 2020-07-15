@@ -36,6 +36,26 @@ class CategoryServiceImpl: CategoryService {
     }
 
     /**
+     * 查询所有子类目id
+     */
+    override fun findSubCategoryId(id: Int, resultSet: HashSet<Int?>) {
+        val categories = categoryDao.findAllByStatus()
+        findSubCategoryId(id, resultSet, categories)
+    }
+    
+    private fun findSubCategoryId(id: Int, resultSet: HashSet<Int?>, categories: List<Category>) {
+        //获取子目录id集合
+        val subCategoryIdSet = categories.asSequence()
+                .filter { it.parentId == id }
+                .map { it.id }
+                .toSet()
+        resultSet.addAll(subCategoryIdSet)
+        
+        //递归遍历是否还有子目录
+        subCategoryIdSet.forEach { it?.let { subId -> findSubCategoryId(subId, resultSet, categories) } }
+    }
+
+    /**
      * 递归查询子目录
      */
     private fun findSubCategory(categoryParentList: List<CategoryVo>, categories: List<Category>) {

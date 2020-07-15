@@ -1,0 +1,6 @@
+### 分页查询商品信息
+GET http://{{host}}/products?categoryId=100002&pageNum=1&pageSize=2
+
+
+### 查询商品详情
+GET http://{{host}}/products/26

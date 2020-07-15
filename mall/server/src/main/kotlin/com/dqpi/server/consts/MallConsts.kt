@@ -10,4 +10,9 @@ object MallConsts {
      * 目标遍历所需根目录编号
      */
     const val ROOT_PARENT_ID = 0
+
+    /**
+     * 在售状态
+     */
+    const val ON_SALE = 1
 }

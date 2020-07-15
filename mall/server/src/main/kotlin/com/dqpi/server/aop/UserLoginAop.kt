@@ -19,7 +19,8 @@ class UserLoginAop {
     
     @Pointcut("!execution(* com..controller.UserController.login(..)) " +
             "&& !execution(* com..controller.UserController.register(..)) " +
-            "&& !execution(* com..controller.CategoryController.findAll(..))")
+            "&& !execution(* com..controller.CategoryController.findAll(..)) " +
+            "&& !execution(* com..controller.ProductController.*(..))")
     private fun excludePointcut(){}
 
     @Before("excludePointcut() && execution(* com..controller.*.*(..))")
