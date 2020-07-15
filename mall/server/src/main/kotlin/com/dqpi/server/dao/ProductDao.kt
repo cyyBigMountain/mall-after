@@ -10,9 +10,15 @@ import org.springframework.data.domain.Pageable
 interface ProductDao: JpaRepository<Product, Int> {
 
     /**
-     * 查询所有id集合内的产品, 默认所有在售状态
+     * 查询所有目录id集合内的产品, 默认所有在售状态
      */
     fun findAllByCategoryIdInAndStatus(categoryIdSet: Set<Int?>, 
                                        status: Int = MallConsts.ON_SALE,
                                        pageable: Pageable): Page<Product>
+
+    /**
+     * 查询所有商品id集合内的产品, 默认所有在售状态
+     */
+    fun findAllByIdInAndStatus(ids: List<Int>, 
+                               status: Int = MallConsts.ON_SALE): List<Product>
 }

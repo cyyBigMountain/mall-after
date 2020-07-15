@@ -25,27 +25,15 @@ class UserController {
     private lateinit var userService: UserService
     
     @PostMapping("/user/register")
-    fun register(@Valid @RequestBody userRegisterVo: UserRegisterVo,
-                 bindingResult: BindingResult): ResponseVo<String> {
-        if (bindingResult.hasErrors()) {
-            log.info("注册提交的信息有误, ${bindingResult.fieldError?.field}, " +
-                    "${bindingResult.fieldError?.defaultMessage}")
-            return ResponseVo.error(ResponseEnum.PARAM_ERROR, bindingResult)
-        }
-        
+    fun register(@Valid @RequestBody userRegisterVo: UserRegisterVo): ResponseVo<String> {
         val user = User()
         BeanUtils.copyProperties(userRegisterVo, user)
         return userService.register(user)
     }
     
     @PostMapping("/user/login")
-    fun login(@Valid @RequestBody userLoginVo: UserLoginVo,
-              bindingResult: BindingResult, 
+    fun login(@Valid @RequestBody userLoginVo: UserLoginVo, 
               httpSession: HttpSession): ResponseVo<User> {
-        if (bindingResult.hasErrors()) {
-            return ResponseVo.error(ResponseEnum.PARAM_ERROR, bindingResult)
-        }
-        
         val userResponseVo = userService.login(userLoginVo.username, userLoginVo.password)
             
         //设置session

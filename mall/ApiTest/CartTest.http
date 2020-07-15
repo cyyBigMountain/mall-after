@@ -1,0 +1,30 @@
+### 购物车查询
+GET http://{{host}}/carts
+
+### 购物车添加
+POST http://{{host}}/carts
+Content-Type: application/json
+
+{
+  "productId": "27"
+}
+
+### 更新购物车
+PUT http://{{host}}/carts/27
+Content-Type: application/json
+
+{
+  "quantity": "10"
+}
+
+### 移除购物车某个商品
+DELETE http://{{host}}/carts/27
+
+### 全选中
+PUT http://{{host}}/carts/selectAll
+
+### 全不选中
+PUT http://{{host}}/carts/unSelectAll
+
+### 获取购物中所有商品数量总和
+GET http://{{host}}/carts/products/sum
