@@ -1,2 +1,0 @@
-###类目查询
-GET http://{{host}}/categories
