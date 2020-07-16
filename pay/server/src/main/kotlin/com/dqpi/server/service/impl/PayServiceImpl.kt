@@ -1,5 +1,6 @@
 package com.dqpi.server.service.impl
 
+import com.alibaba.fastjson.JSON
 import com.dqpi.server.dao.PayInfoDao
 import com.dqpi.server.domain.entity.PayInfo
 import com.dqpi.server.enums.PayPlatformEnum
@@ -11,6 +12,7 @@ import com.lly835.bestpay.model.PayRequest
 import com.lly835.bestpay.model.PayResponse
 import com.lly835.bestpay.service.BestPayService
 import org.slf4j.LoggerFactory
+import org.springframework.amqp.core.AmqpTemplate
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.util.*
@@ -18,6 +20,10 @@ import javax.annotation.Resource
 
 @Service
 class PayServiceImpl: PayService {
+    companion object {
+        const val QUEUE_PAY_NOTIFY: String = "payNotify"
+    }
+    
     private val log = LoggerFactory.getLogger(this::class.java)
 
     @Resource
@@ -25,6 +31,9 @@ class PayServiceImpl: PayService {
     
     @Resource
     private lateinit var payInfoDao: PayInfoDao
+    
+    @Resource
+    private lateinit var amqpTemplate: AmqpTemplate
     
     /**
      * 发起支付
@@ -74,6 +83,9 @@ class PayServiceImpl: PayService {
                 it.platformNumber = payResponse.outTradeNo
                 payInfoDao.save(it)
             }
+
+            //发送MQ消息通知mall
+            amqpTemplate.convertAndSend(QUEUE_PAY_NOTIFY, JSON.toJSONString(it))
         }
         
         
