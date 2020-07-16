@@ -200,10 +200,10 @@ class CartServiceImpl: CartService {
     /**
      * 获取购物车列表
      */
-    private fun listForCart(uid: Int): List<Cart> {
+    override fun listForCart(uid: Int): List<Cart> {
         val (opsForHash, redisKey) = getOpsForHashAndRedisKey(uid)
         val cartList = ArrayList<Cart>()
-        opsForHash.entries(redisKey).forEach { _, cart ->
+        opsForHash.entries(redisKey).forEach { (_, cart) ->
             cartList.add(JSON.parseObject(cart, Cart::class.java))
         }
 

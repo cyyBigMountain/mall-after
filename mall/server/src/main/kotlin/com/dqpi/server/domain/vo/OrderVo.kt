@@ -1,39 +1,15 @@
-package com.dqpi.server.domain.entity
+package com.dqpi.server.domain.vo
 
-import org.hibernate.annotations.DynamicInsert
-import org.hibernate.annotations.DynamicUpdate
+import com.dqpi.server.domain.entity.Shipping
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
 
-@Entity
-@DynamicUpdate
-@DynamicInsert
-data class Order(
-        /**
-         * id
-         */
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Int? = null,
 
+data class OrderVo(
         /**
          * 订单编号
          */
         var orderNo: Long? = null,
-
-        /**
-         * 用户id
-         */
-        var userId: Int? = null,
-
-        /**
-         * 运输id
-         */
-        var shippingId: Int? = null,
 
         /**
          * 实际付款金额
@@ -79,9 +55,10 @@ data class Order(
          * 创建时间
          */
         var createTime: LocalDateTime? = null,
-
-        /**
-         * 修改时间
-         */
-        var updateTime: LocalDateTime? = null
+        
+        var orderItemVoList: List<OrderItemVo>? = null,
+        
+        var shippingId: Int? = null,
+        
+        var shippingVo: Shipping? = null
 )

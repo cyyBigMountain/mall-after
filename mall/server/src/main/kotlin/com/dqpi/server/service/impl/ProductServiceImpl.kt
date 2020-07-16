@@ -45,7 +45,7 @@ class ProductServiceImpl: ProductService {
         val pageVo = PageVo<List<ProductVo>>()
         pageVo.pageNum = pageProduct.number + 1
         pageVo.pageSize = pageProduct.size
-        pageVo.data = pageProduct.map(::productToProductVo).toList()
+        pageVo.pageData = pageProduct.map(::productToProductVo).toList()
         pageVo.totalElements = pageProduct.totalElements
         
         return ResponseVo.success(data = pageVo)

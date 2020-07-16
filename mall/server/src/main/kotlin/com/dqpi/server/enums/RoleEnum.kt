@@ -1,8 +1,6 @@
 package com.dqpi.server.enums
 
-enum class RoleEnum(
-        val code: Int
-) {
+enum class RoleEnum(val code: Int) {
     /**
      * 管理员
      */

@@ -73,7 +73,7 @@ class ShippingServiceImpl: ShippingService {
         pageVo.pageNum = pageShipping.number + 1
         pageVo.pageSize = pageShipping.size
         pageVo.totalElements = pageShipping.totalElements
-        pageVo.data = pageShipping.content
+        pageVo.pageData = pageShipping.content
 
         return ResponseVo.success(data = pageVo)
     }

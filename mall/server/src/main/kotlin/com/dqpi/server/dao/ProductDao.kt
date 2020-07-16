@@ -17,8 +17,14 @@ interface ProductDao: JpaRepository<Product, Int> {
                                        pageable: Pageable): Page<Product>
 
     /**
-     * 查询所有商品id集合内的产品, 默认所有在售状态
+     * 查询所有商品id列表内的产品, 默认所有在售状态
      */
     fun findAllByIdInAndStatus(ids: List<Int>, 
                                status: Int = MallConsts.ON_SALE): List<Product>
+
+
+    /**
+     * 查询所有商品id列表内的产品
+     */
+    fun findAllByIdIn(ids: List<Int>): List<Product>
 }

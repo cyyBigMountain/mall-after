@@ -21,4 +21,9 @@ interface ShippingDao: JpaRepository<Shipping, Int> {
      * 分页查询用户地址列表
      */
     fun findAllByUserId(uid: Int, pageable: Pageable): Page<Shipping>
+
+    /**
+     * 根据id集合查询所有地址
+     */
+    fun findAllByIdIn(idSet: Set<Int>): List<Shipping>
 }

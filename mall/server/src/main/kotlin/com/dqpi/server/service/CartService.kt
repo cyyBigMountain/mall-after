@@ -1,6 +1,7 @@
 package com.dqpi.server.service
 
 import com.dqpi.server.domain.common.ResponseVo
+import com.dqpi.server.domain.entity.Cart
 import com.dqpi.server.domain.vo.CartVo
 import com.dqpi.server.form.CartAddForm
 import com.dqpi.server.form.CartUpdateForm
@@ -40,4 +41,9 @@ interface CartService {
      * 商品总数
      */
     fun sum(uid: Int): ResponseVo<Int>
+
+    /**
+     * 获取购物车列表
+     */
+    fun listForCart(uid: Int): List<Cart>
 }
