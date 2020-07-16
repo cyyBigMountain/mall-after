@@ -26,4 +26,9 @@ interface OrderService {
      * 取消订单
      */
     fun cancel(uid: Int, orderNo: Long): ResponseVo<String>
+
+    /**
+     * 修改订单为已支付
+     */
+    fun paid(orderNo: Long)
 }

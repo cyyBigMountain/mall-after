@@ -208,8 +208,32 @@ class OrderServiceImpl: OrderService {
         return ResponseVo.success()
     }
 
+    /**
+     * 修改订单为已支付
+     */
+    override fun paid(orderNo: Long) {
+        val orderOpt = orderMasterDao.findByOrderNo(orderNo)
+        require(orderOpt.isPresent) {
+            throw RuntimeException("${ResponseEnum.ORDER_NOT_EXIST.message}, 订单编号: $orderNo")
+        }
 
-    private fun buildOrderVo(order: OrderMaster, orderItemList: List<OrderItem>, 
+        orderOpt.get().let {
+            //只有未付款订单可以变为已付款
+            require(it.status == OrderStatusEnum.NO_PAY.code) {
+                throw RuntimeException("${ResponseEnum.ORDER_STATUS_ERROR.message}, 订单编号: $orderNo")
+            }
+
+            it.status = OrderStatusEnum.PAID.code
+            it.paymentTime = LocalDateTime.now()
+            try {
+                orderMasterDao.save(it)
+            }catch (e: Exception) {
+                throw RuntimeException("将订单更新为支付状态失败: 订单编号=${it.orderNo}")
+            }
+        }    
+    }
+
+    private fun buildOrderVo(order: OrderMaster, orderItemList: List<OrderItem>,
                              shipping: Shipping): OrderVo {
         val orderVo = OrderVo()
         BeanUtils.copyProperties(order, orderVo)

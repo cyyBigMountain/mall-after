@@ -26,4 +26,6 @@ interface ShippingDao: JpaRepository<Shipping, Int> {
      * 根据id集合查询所有地址
      */
     fun findAllByIdIn(idSet: Set<Int>): List<Shipping>
+    
+    
 }
